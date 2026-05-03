@@ -1,4 +1,4 @@
-# Build context = repo root (backend/Dockerfile, Easypanel).
+﻿# Build context = repo root (backend/Dockerfile, frontend/Dockerfile, Easypanel).
 .git
 **/.venv
 **/__pycache__
