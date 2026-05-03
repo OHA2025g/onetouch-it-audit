@@ -1,0 +1,103 @@
+{
+  "theme": "LIGHT",
+  "archetype": "Archetype 4: Swiss & High-Contrast",
+  "domain_context": "Enterprise SaaS / IT Audit Command Center for CIOs",
+  "design_principles": [
+    "Objective, rigid, and functional over decorative.",
+    "High-density data visualization ('Control Room' grid layout) to reduce scrolling and maximize visibility.",
+    "Color is used exclusively for functional state (risk, success, warning), not decoration.",
+    "Strict 1px borders and sharp edges (rounded-sm or rounded-none) to enforce an authoritative, 'Bloomberg Terminal' aesthetic."
+  ],
+  "typography": {
+    "heading_font": "Chivo",
+    "body_font": "IBM Plex Sans",
+    "font_url": "https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700;900&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap",
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl font-black tracking-tighter",
+      "h2": "text-2xl sm:text-3xl font-bold tracking-tight",
+      "h3": "text-xl sm:text-2xl font-bold tracking-tight",
+      "h4": "text-lg sm:text-xl font-semibold",
+      "body": "text-sm sm:text-base leading-relaxed",
+      "overline": "text-xs font-bold uppercase tracking-[0.2em]"
+    }
+  },
+  "colors": {
+    "light_mode": {
+      "background": "#F4F4F5", 
+      "surface": "#FFFFFF",
+      "text_primary": "#09090B",
+      "text_secondary": "#52525B",
+      "border": "#E4E4E7",
+      "brand_primary": "#0047AB",
+      "accent_danger": "#DC2626",
+      "accent_warning": "#F59E0B",
+      "accent_success": "#059669"
+    },
+    "dark_mode": {
+      "background": "#09090B",
+      "surface": "#18181B",
+      "text_primary": "#FAFAFA",
+      "text_secondary": "#A1A1AA",
+      "border": "#27272A",
+      "brand_primary": "#3B82F6",
+      "accent_danger": "#EF4444",
+      "accent_warning": "#FBBF24",
+      "accent_success": "#10B981"
+    }
+  },
+  "spacing_and_layout": {
+    "strategy": "The 'Control Room' Grid",
+    "base_grid": "grid-cols-1 md:grid-cols-3 lg:grid-cols-4",
+    "gaps": "gap-4 lg:gap-6",
+    "padding_scale": "p-4 sm:p-6 inside widgets",
+    "alignment_rules": [
+      "Left-align data grids and numerical lists.",
+      "Right-align financial figures (₹).",
+      "Dense compact spacing for executive scanability."
+    ]
+  },
+  "surface_styles": {
+    "widgets_and_cards": {
+      "description": "Grid Borders ('Technical' Look)",
+      "classes": "bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-sm shadow-none hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
+    },
+    "headers": {
+      "description": "Solid with sharp bottom border",
+      "classes": "bg-white/95 dark:bg-zinc-950/95 backdrop-blur-sm border-b border-zinc-200 dark:border-zinc-800 z-50"
+    }
+  },
+  "motion_and_interactions": {
+    "hover_states": "hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors duration-200 ease-in-out",
+    "animations": "Minimal micro-interactions. Staggered fade-ins for list items and table rows.",
+    "focus_states": "focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+  },
+  "components": {
+    "ui_library": "shadcn/ui",
+    "charts": "Recharts with monochrome styling + functional semantic colors only (e.g., Red for Critical Risk, Amber for Overdue, Green for Ready).",
+    "icons": "Phosphor Icons (@phosphor-icons/react) - optimal for dense dashboards.",
+    "specific_guidelines": {
+      "cards": "Avoid default Shadow-md. Use flat 1px borders. Apply 'p-4 or p-6' padding.",
+      "tables": "High density. Use zebra striping (odd:bg-zinc-50 dark:odd:bg-zinc-900/50) for large sets. Right align numeric columns.",
+      "badges": "Square edges, high contrast. Danger: bg-red-100 text-red-800 border border-red-200.",
+      "currency": "Format all financials with Indian Rupee (₹) and standard Indian numbering system."
+    }
+  },
+  "media_urls": {
+    "login_background": {
+      "url": "https://images.unsplash.com/photo-1745689226178-a99780b5151b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGNvcnBvcmF0ZSUyMGFyY2hpdGVjdHVyZXxlbnwwfHx8fDE3Nzc2MTYwNTd8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Abstract corporate architecture to serve as a structural background for the login page overlay."
+    }
+  },
+  "accessibility_and_testing": {
+    "testing_attributes": "All interactive elements MUST have data-testid (e.g., data-testid='login-submit-button').",
+    "contrast": "Ensure minimum 4.5:1 ratio for normal text. APCA guidelines preferred over WCAG 2."
+  },
+  "instructions_to_main_agent": [
+    "Install Phosphor Icons: yarn add @phosphor-icons/react",
+    "Implement 'Control Room' density: Avoid excessive whitespace; prioritize data visibility above the fold.",
+    "Theme: Integrate next-themes for Light/Dark toggling, following the strict Zinc monochrome + semantic color mapping.",
+    "Data Visualizations: Render the CIO Dashboard with Recharts. Implement Radar chart for 8-axis sub-scores and 5x5 Grid/Heatmap for Risk visualization.",
+    "UI Overrides: All Shadcn primitives must be styled with rounded-sm and sharp borders (border-zinc-200/800) to enforce the high-contrast technical aesthetic. Remove default card shadows.",
+    "Use standard Indian locale (en-IN) formatting for all ₹ currency fields."
+  ]
+}

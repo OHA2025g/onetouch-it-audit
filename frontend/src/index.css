@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    margin: 0;
+    font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: 'Chivo', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+}
+
+.font-mono, code, pre {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+    :root {
+        --background: 0 0% 96%;
+        --foreground: 240 6% 6%;
+        --card: 0 0% 100%;
+        --card-foreground: 240 6% 6%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 6% 6%;
+        --primary: 213 100% 33%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 240 5% 92%;
+        --secondary-foreground: 240 6% 6%;
+        --muted: 240 5% 92%;
+        --muted-foreground: 240 4% 35%;
+        --accent: 240 5% 92%;
+        --accent-foreground: 240 6% 6%;
+        --destructive: 0 73% 51%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 240 6% 90%;
+        --input: 240 6% 90%;
+        --ring: 213 100% 33%;
+        --chart-1: 213 100% 33%;
+        --chart-2: 0 73% 51%;
+        --chart-3: 38 92% 50%;
+        --chart-4: 158 84% 35%;
+        --chart-5: 261 51% 51%;
+        --radius: 0.125rem;
+    }
+    .dark {
+        --background: 240 6% 6%;
+        --foreground: 0 0% 98%;
+        --card: 240 4% 10%;
+        --card-foreground: 0 0% 98%;
+        --popover: 240 4% 10%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 217 91% 60%;
+        --primary-foreground: 240 6% 6%;
+        --secondary: 240 4% 16%;
+        --secondary-foreground: 0 0% 98%;
+        --muted: 240 4% 16%;
+        --muted-foreground: 240 5% 63%;
+        --accent: 240 4% 16%;
+        --accent-foreground: 0 0% 98%;
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 4% 16%;
+        --input: 240 4% 16%;
+        --ring: 217 91% 60%;
+        --chart-1: 217 91% 60%;
+        --chart-2: 0 84% 60%;
+        --chart-3: 38 96% 56%;
+        --chart-4: 158 64% 45%;
+        --chart-5: 261 71% 65%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* Density / Control room */
+.crt-card {
+    @apply bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-sm shadow-none transition-colors;
+}
+.crt-card:hover {
+    @apply border-zinc-300 dark:border-zinc-700;
+}
+.crt-overline {
+    @apply text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400;
+}
+.crt-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-feature-settings: 'tnum' 1;
+}
+.crt-table tr:nth-child(even) {
+    @apply bg-zinc-50 dark:bg-zinc-900/50;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground)); }
+
+/* Fade-in animations */
+@keyframes fade-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 0.4s ease-out both; }
+
+/* Recharts overrides */
+.recharts-text { fill: hsl(var(--muted-foreground)); font-size: 11px; }
+.recharts-cartesian-axis-line, .recharts-cartesian-grid-horizontal line, .recharts-cartesian-grid-vertical line {
+    stroke: hsl(var(--border));
+}
+
+@layer base {
+    [data-debug-wrapper="true"] {
+        display: contents !important;
+    }
+}

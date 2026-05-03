@@ -1,0 +1,47 @@
+# Full stack: MongoDB + FastAPI + static React behind nginx.
+# UI and API (proxied): http://localhost:5176 — rebuild web with another
+# REACT_APP_BACKEND_URL if you access from a different host/port.
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 8
+      start_period: 15s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      MONGO_URL: mongodb://mongo:27017
+      DB_NAME: audit_ai
+      JWT_SECRET: ${JWT_SECRET:-docker-dev-jwt-secret-change-for-production-min-32-chars}
+      JWT_ALGORITHM: HS256
+      ACCESS_TOKEN_MINUTES: "60"
+      FERNET_KEY: ${FERNET_KEY:-oHYeaJSraAgYVrPKwJMaIsbVQARjqHrcgVk4fHSZcmA=}
+      CORS_ORIGINS: http://localhost:5176,http://127.0.0.1:5176
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_BACKEND_URL: http://localhost:5176
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "5176:80"
+
+volumes:
+  mongo_data:
